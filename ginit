@@ -1,6 +1,6 @@
-(ns git-initializer.core
-  (:gen-class)
-  (:require [clojure.java.shell :as sh]))
+#!/usr/bin/env bb
+
+(require '[clojure.java.shell :as sh])
 
 (def add ["add" "."])
 (defn commit [commit-msg] ["commit" "-m" commit-msg])
@@ -13,9 +13,7 @@
         (println (:out result))
         (println (:err result))))))
 
-(defn -main
-  [& args]
+(let [args *command-line-args*]
   (if (empty? args)
-    (println "Error, you didn't specify a commit msg")
+    (println "Error: Falta mensaje")
     (execute-process (first args))))
-
