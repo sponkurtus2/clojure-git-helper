@@ -12,9 +12,10 @@
       (let [result (apply sh/sh "git" args)]
         (println (:out result))
         (println (:err result))))))
-; sh/sh "git" i)
 
 (defn -main
   [& args]
-  (execute-process args))
+  (if (empty? args)
+    (println "Error, you didn't specify a commit msg")
+  (execute-process (first args))))
 
